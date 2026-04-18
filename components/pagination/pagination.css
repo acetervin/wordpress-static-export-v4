@@ -1,0 +1,66 @@
+.woocommerce-pagination>ul.page-numbers{
+  vertical-align:top;
+  float:none;
+  padding:0;
+  display:flex;
+  align-items:flex-end;
+  flex-wrap:wrap;
+  justify-content:center;
+  list-style:none; 
+}
+.woocommerce-pagination>ul.page-numbers li{
+    margin-right:10px; 
+}
+.woocommerce-pagination>ul.page-numbers li:last-child{
+      margin-right:0; 
+}
+.woocommerce-pagination>ul.page-numbers li a,
+.woocommerce-pagination>ul.page-numbers li span{
+      display:inline-block;
+      padding:0;
+      width:40px;
+      height:40px;
+      line-height:40px;
+      float:none;
+      text-indent:1px;
+      text-align:center;
+      color: #868686;
+      font-size: 16px;
+      transition:all .3s ease;
+      text-transform:uppercase;
+      border-radius:50px;
+}
+.woocommerce-pagination>ul.page-numbers li a.current,
+.woocommerce-pagination>ul.page-numbers li a:focus,
+.woocommerce-pagination>ul.page-numbers li a:hover,
+.woocommerce-pagination>ul.page-numbers li span.current,
+.woocommerce-pagination>ul.page-numbers li span:focus,
+.woocommerce-pagination>ul.page-numbers li span:hover{
+        color: #fff;
+        background: #e46a4b;
+        border: 1px dashed #fff; 
+}
+.woocommerce-pagination>ul.page-numbers li a.next,
+.woocommerce-pagination>ul.page-numbers li a.prev,
+.woocommerce-pagination>ul.page-numbers li span.next,
+.woocommerce-pagination>ul.page-numbers li span.prev{
+        font-size:0; 
+}
+.woocommerce-pagination>ul.page-numbers li a.next:before,
+.woocommerce-pagination>ul.page-numbers li a.prev:before,
+.woocommerce-pagination>ul.page-numbers li span.next:before,
+.woocommerce-pagination>ul.page-numbers li span.prev:before{
+          font-size:18px;
+          font-family:wpbingofont; 
+}
+.woocommerce-pagination>ul.page-numbers li a.prev:before,
+.woocommerce-pagination>ul.page-numbers li span.prev:before{
+        content:"\e903"; 
+}
+.woocommerce-pagination>ul.page-numbers li a.next:before,
+.woocommerce-pagination>ul.page-numbers li span.next:before{
+        content:"\e904"; 
+}
+.woocommerce-pagination>ul.page-numbers li:first-child{
+      margin-left:0; 
+}

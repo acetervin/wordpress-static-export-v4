@@ -1,0 +1,57 @@
+#bwp_slider_price::before, 
+#bwp_slider_price::after {
+    background: #fff none repeat scroll 0 0;
+    content: "";
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    width: 5px;
+    z-index: 1;
+}
+
+#bwp_slider_price {
+    background-color: #f03939;
+    border-radius: 5px;
+    height: 6px;
+    margin: 10px;
+    position: relative;
+}
+
+#bwp_slider_price .ui-slider-handle {
+    background: #fff none repeat scroll 0 0;
+    border: 3px solid #f03939;
+    color: #f03939;
+    cursor: e-resize;
+    display: block;
+    height: 14px;
+    position: absolute;
+    text-align: center;
+    top: -7px;
+    width: 14px;
+    z-index: 15;	
+    margin-right: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+}
+
+.bwp-filter-price h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.price-input {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.price-input span {
+    display: inline-block;
+}
+
+.text-price-filter {
+    font-weight: 600;
+    color: #333;
+}
