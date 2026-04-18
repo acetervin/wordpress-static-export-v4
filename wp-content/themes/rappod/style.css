@@ -1,0 +1,16 @@
+/*
+Theme Name: Rappod
+Theme URI: http://wpbingosite.com/wordpress/rappod/
+Author: Wpbingo
+Author URI: http://wpbingosite.com/
+Description: Rappod is a modern, clean and professional WooCommerce WordPress theme. It is built to well suit for any online stores: electronics store, fashion store, jewelry store...
+Version: 1.2.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: blog, two-columns, left-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
+Text Domain: rappod*/
+/* Temporarily hide the site footer. Remove to restore footer output. */
+#bwp-footer,
+.bwp-copyright {
+	display: none !important;
+}

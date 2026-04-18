@@ -1,0 +1,46 @@
+@font-face{
+  font-family:wpbingofont;
+  src:url(/wp-content/themes/rappod/fonts/wpbingo.eot?fzv6fp);
+  src:url(/wp-content/themes/rappod/fonts/wpbingo.eot?fzv6fp#iefix) format("embedded-opentype"),url(/wp-content/themes/rappod/fonts/wpbingo.ttf?fzv6fp) format("truetype"),url(/wp-content/themes/rappod/fonts/wpbingo.woff?fzv6fp) format("woff"),url(/wp-content/themes/rappod/fonts/wpbingo.svg?fzv6fp#wpbingo) format("svg");
+  font-weight:400;
+  font-style:normal;
+  font-display:block;
+}
+
+[class*=" wpb-icon-"],[class^=wpb-icon-]{
+  font-family:wpbingofont;
+  speak:none;
+  font-style:normal;
+  font-weight:400;
+  font-variant:normal;
+  text-transform:none;
+  line-height:1;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.wpb-icon-chat:before{
+  content:"\e900";
+}
+.wpb-icon-user:before{
+  content:"\e90a";
+}
+.wpb-icon-coupon:before{
+  content:"\e909";
+}
+.wpb-icon-video:before{
+  content:"\e908";
+}
+.wpb-icon-view-list:before{
+  content:"\e907";
+}
+.wpb-icon-remove:before{
+  content:"\e905";
+}
+.wpb-icon-arrow-left:before{
+  content:"\e903";
+}
+.wpb-icon-arrow-right:before{
+  content:"\e904";
+}
+
