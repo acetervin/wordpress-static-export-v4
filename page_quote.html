@@ -6,12 +6,12 @@
     // Prevent WordPress/WooCommerce from hijacking the static site routing
     (function() {
         const noop = () => {};
-        // window.location.reload = noop; // Be careful with this, but helpful if loops persist
+        // // window.location.reload = noop; // Be careful with this, but helpful if loops persist
         window.history.pushState = noop;
         window.history.replaceState = noop;
         
         // Block Simply Static's own redirect logic if it still exists
-        window.SimplyStatic = { redirect: noop };
+        window.SimplyStatic = { redirect: function(){} };
     })();
 </script>
 <meta charset="UTF-8">
