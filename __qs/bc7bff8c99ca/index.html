@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <!--<![endif]-->
-<head><meta charset="UTF-8">
+<head>
+<script>
+    // Prevent WordPress/WooCommerce from hijacking the static site routing
+    (function() {
+        const noop = () => {};
+        // window.location.reload = noop; // Be careful with this, but helpful if loops persist
+        window.history.pushState = noop;
+        window.history.replaceState = noop;
+        
+        // Block Simply Static's own redirect logic if it still exists
+        window.SimplyStatic = { redirect: noop };
+    })();
+</script>
+<meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="//gmpg.org/xfn/11">
@@ -348,7 +361,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 	<li class="level-1 menu-item-51201      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=15115/">Contact</a></li>
 	<li class="level-1 menu-item-51202      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=14474/">Faq</a></li>
 	<li class="level-1 menu-item-51203      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=39326/">Faq 2</a></li>
-	<li class="level-1 menu-item-48766      menu-item menu-item-type-custom menu-item-object-custom  std-menu      "><a href="https://rappod.wpbingosite.com/404">Page 404</a></li>
+	<li class="level-1 menu-item-48766      menu-item menu-item-type-custom menu-item-object-custom  std-menu      "><a href="/404">Page 404</a></li>
 </ul>
 </li>
 </ul></div></nav>
@@ -497,7 +510,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-5100485 img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="5100485" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-1-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/">Home 1</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-1-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/">Home 1</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -505,7 +518,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-7184806 img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="7184806" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/home-2/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-2-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/home-2/">Home 2</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/home-2/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-2-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/home-2/">Home 2</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -513,7 +526,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-8f0f608 img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="8f0f608" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/home-3/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-3-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/home-3/">Home 3</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/home-3/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-3-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/home-3/">Home 3</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -521,7 +534,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-a33248e img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="a33248e" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/home-4/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-4-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/home-4/">Home 4</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/home-4/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-4-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/home-4/">Home 4</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -533,7 +546,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-0583801 img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="0583801" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/home-5/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-5-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/home-5/">Home 5</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/home-5/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-5-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/home-5/">Home 5</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -541,7 +554,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-1984ab3 img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="1984ab3" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/home-6/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-6-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/home-6/">Home 6</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/home-6/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-6-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/home-6/">Home 6</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -549,7 +562,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-efccd5a img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="efccd5a" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/home-7/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-7-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/home-7/">Home 7</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/home-7/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-7-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/home-7/">Home 7</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -557,7 +570,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-4c85f9f img-menu elementor-position-top elementor-widget elementor-widget-image-box" data-id="4c85f9f" data-element_type="widget" data-e-type="widget" data-widget_type="image-box.default">
 				<div class="elementor-widget-container">
-					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="https://rappod.wpbingosite.com/home-8/" tabindex="-1"><img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/index-8-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://rappod.wpbingosite.com/home-8/">Home 8</a></h3></div></div>				</div>
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="/home-8/" tabindex="-1"><img decoding="async" src="/wp-content/uploads/2023/08/index-8-1.jpg" title="" alt="" class="elementor-animation-wobble-horizontal" loading="lazy"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="/home-8/">Home 8</a></h3></div></div>				</div>
 				</div>
 					</div>
 		</div>
@@ -569,7 +582,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="elementor-widget-wrap elementor-element-populated">
 						<div class="elementor-element elementor-element-859becb elementor-widget elementor-widget-image" data-id="859becb" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
 				<div class="elementor-widget-container">
-															<img decoding="async" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/08/mega-menu.png" title="" alt="" loading="lazy">															</div>
+															<img decoding="async" src="/wp-content/uploads/2023/08/mega-menu.png" title="" alt="" loading="lazy">															</div>
 				</div>
 					</div>
 		</div>
@@ -600,10 +613,10 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<input type="text" value="" name="s" id="s" class="input-search s" placeholder="Search products...">
 			<div class="content-menu_search">
 				<label>Quick search:</label>
-				<ul id="menu_search" class="menu"><li id="menu-item-48767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48767"><a href="https://rappod.wpbingosite.com/product-category/notebook/">Notebook</a></li>
-<li id="menu-item-48768" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48768"><a href="https://rappod.wpbingosite.com/product-category/pencil/">Pencil</a></li>
-<li id="menu-item-48769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48769"><a href="https://rappod.wpbingosite.com/product-category/pencil-pocket/">Pencil Pocket</a></li>
-<li id="menu-item-48770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48770"><a href="https://rappod.wpbingosite.com/product-category/sticker/">Sticker</a></li>
+				<ul id="menu_search" class="menu"><li id="menu-item-48767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48767"><a href="/product-category/notebook/">Notebook</a></li>
+<li id="menu-item-48768" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48768"><a href="/product-category/pencil/">Pencil</a></li>
+<li id="menu-item-48769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48769"><a href="/product-category/pencil-pocket/">Pencil Pocket</a></li>
+<li id="menu-item-48770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48770"><a href="/product-category/sticker/">Sticker</a></li>
 </ul>			</div>
 			<div class="result-search-products-content">
 				<ul class="result-search-products">

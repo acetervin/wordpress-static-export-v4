@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <!--<![endif]-->
-<head><meta charset="UTF-8">
+<head>
+<script>
+    // Prevent WordPress/WooCommerce from hijacking the static site routing
+    (function() {
+        const noop = () => {};
+        // window.location.reload = noop; // Be careful with this, but helpful if loops persist
+        window.history.pushState = noop;
+        window.history.replaceState = noop;
+        
+        // Block Simply Static's own redirect logic if it still exists
+        window.SimplyStatic = { redirect: noop };
+    })();
+</script>
+<meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="//gmpg.org/xfn/11">
@@ -343,7 +356,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 	<li class="level-1 menu-item-51201      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=15115/">Contact</a></li>
 	<li class="level-1 menu-item-51202      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=14474/">Faq</a></li>
 	<li class="level-1 menu-item-51203      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=39326/">Faq 2</a></li>
-	<li class="level-1 menu-item-48766      menu-item menu-item-type-custom menu-item-object-custom  std-menu      "><a href="https://rappod.wpbingosite.com/404">Page 404</a></li>
+	<li class="level-1 menu-item-48766      menu-item menu-item-type-custom menu-item-object-custom  std-menu      "><a href="/404">Page 404</a></li>
 </ul>
 </li>
 </ul></div></nav>
@@ -579,10 +592,10 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<input type="text" value="" name="s" id="s" class="input-search s" placeholder="Search products...">
 			<div class="content-menu_search">
 				<label>Quick search:</label>
-				<ul id="menu_search" class="menu"><li id="menu-item-48767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48767"><a href="https://rappod.wpbingosite.com/product-category/notebook/">Notebook</a></li>
-<li id="menu-item-48768" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48768"><a href="https://rappod.wpbingosite.com/product-category/pencil/">Pencil</a></li>
-<li id="menu-item-48769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48769"><a href="https://rappod.wpbingosite.com/product-category/pencil-pocket/">Pencil Pocket</a></li>
-<li id="menu-item-48770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48770"><a href="https://rappod.wpbingosite.com/product-category/sticker/">Sticker</a></li>
+				<ul id="menu_search" class="menu"><li id="menu-item-48767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48767"><a href="/product-category/notebook/">Notebook</a></li>
+<li id="menu-item-48768" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48768"><a href="/product-category/pencil/">Pencil</a></li>
+<li id="menu-item-48769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48769"><a href="/product-category/pencil-pocket/">Pencil Pocket</a></li>
+<li id="menu-item-48770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48770"><a href="/product-category/sticker/">Sticker</a></li>
 </ul>			</div>
 			<div class="result-search-products-content">
 				<ul class="result-search-products">

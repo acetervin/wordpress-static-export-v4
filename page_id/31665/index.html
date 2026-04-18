@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <!--<![endif]-->
-<head><meta charset="UTF-8">
+<head>
+<script>
+    // Prevent WordPress/WooCommerce from hijacking the static site routing
+    (function() {
+        const noop = () => {};
+        // window.location.reload = noop; // Be careful with this, but helpful if loops persist
+        window.history.pushState = noop;
+        window.history.replaceState = noop;
+        
+        // Block Simply Static's own redirect logic if it still exists
+        window.SimplyStatic = { redirect: noop };
+    })();
+</script>
+<meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="//gmpg.org/xfn/11">
@@ -342,7 +355,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 	<li class="level-1 menu-item-51201      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=15115/">Contact</a></li>
 	<li class="level-1 menu-item-51202      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=14474/">Faq</a></li>
 	<li class="level-1 menu-item-51203      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/page_id=39326/">Faq 2</a></li>
-	<li class="level-1 menu-item-48766      menu-item menu-item-type-custom menu-item-object-custom  std-menu      "><a href="https://rappod.wpbingosite.com/404">Page 404</a></li>
+	<li class="level-1 menu-item-48766      menu-item menu-item-type-custom menu-item-object-custom  std-menu      "><a href="/404">Page 404</a></li>
 </ul>
 </li>
 </ul></div></nav>
@@ -648,7 +661,7 @@ Office Supplies</sr7-txt>
 	<div class="bg-banner">
 		<div class="banner-wrapper banners">
 			<div class="bwp-image ">
-									<a href="https://rappod.wpbingosite.com/shop/"><img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/banner-31.jpg" alt="Banner Image"></a>
+									<a href="/shop/"><img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/banner-31.jpg" alt="Banner Image"></a>
 							</div>
 			<div class="banner-wrapper-infor">
 				<div class="info">
@@ -658,7 +671,7 @@ Office Supplies</sr7-txt>
 									Office Knife Stationery							
 															</div>	
 																			<h3 class="title-banner">Paper Cutter</h3>
-																									<a class="button bwp-align-icon-" href="https://rappod.wpbingosite.com/shop/">
+																									<a class="button bwp-align-icon-" href="/shop/">
 								<span class="bwp-button-text">Shop Now</span>
 															</a>						
 											</div>
@@ -680,7 +693,7 @@ Office Supplies</sr7-txt>
 	<div class="bg-banner">
 		<div class="banner-wrapper banners">
 			<div class="bwp-image ">
-									<a href="https://rappod.wpbingosite.com/shop/"><img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/banner-32.jpg" alt="Banner Image"></a>
+									<a href="/shop/"><img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/banner-32.jpg" alt="Banner Image"></a>
 							</div>
 			<div class="banner-wrapper-infor">
 				<div class="info">
@@ -690,7 +703,7 @@ Office Supplies</sr7-txt>
 									Horizontal orientation							
 															</div>	
 																			<h3 class="title-banner">Clipboard A5</h3>
-																									<a class="button bwp-align-icon-" href="https://rappod.wpbingosite.com/shop/">
+																									<a class="button bwp-align-icon-" href="/shop/">
 								<span class="bwp-button-text">Shop Now</span>
 															</a>						
 											</div>
@@ -712,7 +725,7 @@ Office Supplies</sr7-txt>
 	<div class="bg-banner">
 		<div class="banner-wrapper banners">
 			<div class="bwp-image ">
-									<a href="https://rappod.wpbingosite.com/shop/"><img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/banner-33.jpg" alt="Banner Image"></a>
+									<a href="/shop/"><img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/banner-33.jpg" alt="Banner Image"></a>
 							</div>
 			<div class="banner-wrapper-infor">
 				<div class="info">
@@ -722,7 +735,7 @@ Office Supplies</sr7-txt>
 									Bookmark book pages							
 															</div>	
 																			<h3 class="title-banner">Decorative clip</h3>
-																									<a class="button bwp-align-icon-" href="https://rappod.wpbingosite.com/shop/">
+																									<a class="button bwp-align-icon-" href="/shop/">
 								<span class="bwp-button-text">Shop Now</span>
 															</a>						
 											</div>
@@ -773,11 +786,11 @@ Office Supplies</sr7-txt>
 		<div class="content-banner-image">
 			<div class="banner-product-homepage">
 				<div class="image-banner-product">
-					<a href="https://rappod.wpbingosite.com/shop/"><img decoding="async" class="banner-product" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/banner-26.jpg" alt="Banner Image"></a>
+					<a href="/shop/"><img decoding="async" class="banner-product" src="/wp-content/uploads/2023/10/banner-26.jpg" alt="Banner Image"></a>
 				</div>
 				<div class="banner-wrapper-infor">
 					<div class="content-info">
-																			<a class="button bwp-align-icon-" href="https://rappod.wpbingosite.com/shop/">
+																			<a class="button bwp-align-icon-" href="/shop/">
 								<span class="bwp-button-text">Sticker Set</span>
 															</a>						
 											</div>
@@ -848,7 +861,7 @@ quality products</div>
 						</div>
 									</div>
 									<div class="button-banner">
-						<a class="btn-banner" href="https://rappod.wpbingosite.com/shop/"><span>Shop Now</span></a>
+						<a class="btn-banner" href="/shop/"><span>Shop Now</span></a>
 					</div>
 							</div>
 	</div>
@@ -878,11 +891,11 @@ quality products</div>
 	<div class="bg-banner">		
 		<div class="banner-wrapper banners">
 			<div class="bwp-image">
-									<a href="https://rappod.wpbingosite.com/shop/"><img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/banner-38.jpg" alt="Banner Image"></a>
+									<a href="/shop/"><img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/banner-38.jpg" alt="Banner Image"></a>
 							</div>
 			<div class="banner-wrapper-infor">
 				<div class="info">
-																										<a class="button bwp-align-icon-" href="https://rappod.wpbingosite.com/shop/">
+																										<a class="button bwp-align-icon-" href="/shop/">
 							<span class="bwp-button-text">Stapler set</span>
 													</a>						
 									</div>
@@ -911,7 +924,7 @@ quality products</div>
 						<div class="elementor-element elementor-element-daed7c8 elementor-align-right elementor-mobile-align-center elementor-widget elementor-widget-bwp_button" data-id="daed7c8" data-element_type="widget" data-e-type="widget" data-widget_type="bwp_button.default">
 				<div class="elementor-widget-container">
 							<div class="bwp-button-widget">
-			<a href="https://rappod.wpbingosite.com/shop/" class="bwp-button-link default bwp-button" role="button">
+			<a href="/shop/" class="bwp-button-link default bwp-button" role="button">
 						<span class="bwp-button-content-wrapper">
 						<span class="bwp-button-text">View all</span>
 		</span>
@@ -960,37 +973,37 @@ quality products</div>
 			<div class="slick-carousel" data-dots="false" data-item_row="1" data-nav="true" data-columns4="1" data-columns3="2" data-columns2="3" data-columns1="4" data-columns="5">
 																				<div class="image-instagram">
 							<a class="instagram" href="#">
-								<img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/instagram-1.jpg" alt="Image Slider">
+								<img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/instagram-1.jpg" alt="Image Slider">
 							</a>
 						</div>
 																														<div class="image-instagram">
 							<a class="instagram" href="#">
-								<img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/instagram-2.jpg" alt="Image Slider">
+								<img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/instagram-2.jpg" alt="Image Slider">
 							</a>
 						</div>
 																														<div class="image-instagram">
 							<a class="instagram" href="#">
-								<img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/instagram-3.jpg" alt="Image Slider">
+								<img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/instagram-3.jpg" alt="Image Slider">
 							</a>
 						</div>
 																														<div class="image-instagram">
 							<a class="instagram" href="#">
-								<img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/instagram-4.jpg" alt="Image Slider">
+								<img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/instagram-4.jpg" alt="Image Slider">
 							</a>
 						</div>
 																														<div class="image-instagram">
 							<a class="instagram" href="#">
-								<img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/instagram-5.jpg" alt="Image Slider">
+								<img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/instagram-5.jpg" alt="Image Slider">
 							</a>
 						</div>
 																														<div class="image-instagram">
 							<a class="instagram" href="#">
-								<img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/instagram-6.jpg" alt="Image Slider">
+								<img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/instagram-6.jpg" alt="Image Slider">
 							</a>
 						</div>
 																														<div class="image-instagram">
 							<a class="instagram" href="#">
-								<img decoding="async" class="fade-in lazyload" src="https://rappod.wpbingosite.com/wp-content/uploads/2023/10/instagram-7.jpg" alt="Image Slider">
+								<img decoding="async" class="fade-in lazyload" src="/wp-content/uploads/2023/10/instagram-7.jpg" alt="Image Slider">
 							</a>
 						</div>
 																	</div>
@@ -1088,10 +1101,10 @@ quality products</div>
 			<input type="text" value="" name="s" id="s" class="input-search s" placeholder="Search products...">
 			<div class="content-menu_search">
 				<label>Quick search:</label>
-				<ul id="menu_search" class="menu"><li id="menu-item-48767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48767"><a href="https://rappod.wpbingosite.com/product-category/notebook/">Notebook</a></li>
-<li id="menu-item-48768" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48768"><a href="https://rappod.wpbingosite.com/product-category/pencil/">Pencil</a></li>
-<li id="menu-item-48769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48769"><a href="https://rappod.wpbingosite.com/product-category/pencil-pocket/">Pencil Pocket</a></li>
-<li id="menu-item-48770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48770"><a href="https://rappod.wpbingosite.com/product-category/sticker/">Sticker</a></li>
+				<ul id="menu_search" class="menu"><li id="menu-item-48767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48767"><a href="/product-category/notebook/">Notebook</a></li>
+<li id="menu-item-48768" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48768"><a href="/product-category/pencil/">Pencil</a></li>
+<li id="menu-item-48769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48769"><a href="/product-category/pencil-pocket/">Pencil Pocket</a></li>
+<li id="menu-item-48770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48770"><a href="/product-category/sticker/">Sticker</a></li>
 </ul>			</div>
 			<div class="result-search-products-content">
 				<ul class="result-search-products">
