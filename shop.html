@@ -1274,12 +1274,42 @@ function renderProducts(products) {
         <li class="col-lg-4 col-md-4 col-sm-4 col-6 post-${p.id} product type-product status-publish has-post-thumbnail">
             <div class="products-entry content-product1 clearfix product-wapper">
                 <div class="products-thumb">
+                    <div class="product-lable"></div>
                     <a href="product.html?product=${p.slug}" class="woocommerce-LoopProduct-link">
                         <img width="300" height="300" src="${p.main_image}" class="fade-in lazyload wp-post-image" alt="${p.name}">
                     </a>
+                    <div class="product-button">
+                        <div class="type_simple" data-title="Add to cart">
+                            <a rel="nofollow" href="#" data-quantity="1" data-product_id="${p.id}" class="button product_type_simple add_to_cart_button ajax_add_to_cart">
+                                <span>Add to cart</span>
+                            </a>
+                        </div>
+                        <div class="woosw-wishlist" data-title="Wishlist">
+                            <button class="woosw-btn woosw-btn-${p.id}" data-id="${p.id}">Add to wishlist</button>
+                        </div>
+                        <span class="product-quickview" data-title="Quick View">
+                            <a href="#" data-product_id="${p.id}" class="quickview quickview-button quickview-${p.id}">
+                                <span>Quick View</span>
+                            </a>
+                        </span>
+                    </div>
+                    <div class="product-button-mobile">
+                        <div class="woosw-wishlist" data-title="Wishlist">
+                            <button class="woosw-btn woosw-btn-${p.id}" data-id="${p.id}">Add to wishlist</button>
+                        </div>
+                        <span class="product-quickview" data-title="Quick View">
+                            <a href="#" data-product_id="${p.id}" class="quickview quickview-button quickview-${p.id}">
+                                <span>Quick View</span>
+                            </a>
+                        </span>
+                    </div>
                 </div>
                 <div class="products-content">
                     <div class="contents">
+                        <div class="rating none">
+                            <div class="star-rating none"></div>
+                            <div class="review-count">0 review</div>
+                        </div>
                         <h3 class="product-title"><a href="product.html?product=${p.slug}">${p.name}</a></h3>
                         <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${p.price}</bdi></span></span>
                     </div>
