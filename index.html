@@ -42,6 +42,8 @@
     
     })();
 </script>
+<script src="cart.js"></script>
+<script src="add-to-cart.js"></script>
 <meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width">
@@ -1329,7 +1331,7 @@ Writing Supplies Stationery</h2>				</div>
 					</a>
 				</div> 
 				<div class="form-search">
-						<form role="search" method="get" class="search-from " action="/" data-admin="/#" data-noresult="Sorry No Results Found" data-limit="6">
+						<form role="search" method="get" class="search-from " action="shop.html" data-admin="/#" data-noresult="Sorry No Results Found" data-limit="6">
 			
 		<div class="search-box">
 			<button id="searchsubmit" class="btn" type="submit">
@@ -1610,14 +1612,14 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 <script src="add-to-cart.js"></script>
 
 <script>
-async function loadHomeProducts(filter = 'date') {
+async function loadHomeProducts(filter = 'all') {
     try {
-        const response = await fetch('products.json');
-        const allProducts = await response.json();
+        const allProducts = await cartManager.getProducts();
         const grid = document.getElementById('homepage-grid');
-        
+        if (!grid) return;
+
         let displayProducts = [...allProducts];
-        
+
         if (filter === 'popularity') {
             displayProducts.sort((a, b) => parseInt(b.id) - parseInt(a.id));
             displayProducts = displayProducts.slice(5, 15);
@@ -1719,3 +1721,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+

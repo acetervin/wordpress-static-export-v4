@@ -42,6 +42,8 @@
     
     })();
 </script>
+<script src="cart.js"></script>
+<script src="add-to-cart.js"></script>
 <meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width">
@@ -255,9 +257,8 @@ async function loadProduct() {
     let slug = params.get('product');
     if (!slug) return;
     
-    // Support both 'product-name' and just 'name'
-    const response = await fetch('products.json');
-    const products = await response.json();
+    // Use cached products from cartManager
+    const products = await cartManager.getProducts();
     const p = products.find(item => item.slug === slug || item.slug === 'product-' + slug);
 
     if (p) {
@@ -1113,7 +1114,7 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 					</a>
 				</div> 
 				<div class="form-search">
-						<form role="search" method="get" class="search-from " action="/" data-admin="/#" data-noresult="Sorry No Results Found" data-limit="6">
+						<form role="search" method="get" class="search-from " action="shop.html" data-admin="/#" data-noresult="Sorry No Results Found" data-limit="6">
 			
 		<div class="search-box">
 			<button id="searchsubmit" class="btn" type="submit">
@@ -1366,3 +1367,4 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 <script src="add-to-cart.js"></script>
 </body>
 </html>
+

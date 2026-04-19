@@ -130,8 +130,103 @@ const cartManager = {
         if (window.location.pathname.includes('cart.html')) {
             window.location.reload();
         }
+    },
+
+    async getProducts() {
+        if (window._productCache) return window._productCache;
+        
+        // Use the current script's location to find the root
+        const scriptTag = document.querySelector('script[src*="cart.js"]');
+        const scriptPath = scriptTag ? scriptTag.src.split('cart.js')[0] : './';
+        
+        const paths = [
+            'products.json',
+            scriptPath + 'products.json',
+            '/products.json',
+            '../products.json'
+        ];
+        
+        console.log("Attempting to load products.json from paths:", paths);
+        
+        for (const path of paths) {
+            try {
+                const response = await fetch(path);
+                if (response.ok) {
+                    window._productCache = await response.json();
+                    console.log(`Successfully loaded ${window._productCache.length} products from ${path}`);
+                    return window._productCache;
+                }
+            } catch (e) {
+                // Continue
+            }
+        }
+        
+        console.error("Failed to fetch products from any known path");
+        return [];
+    },
+
+    /**
+     * Phase 4: Static Quick View Implementation
+     */
+    initQuickView() {
+        // Create modal if it doesn't exist
+        if (!document.getElementById('bwp-quickview-modal')) {
+            const modal = document.createElement('div');
+            modal.id = 'bwp-quickview-modal';
+            modal.style.cssText = 'display:none; position:fixed; z-index:10000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); align-items:center; justify-content:center;';
+            modal.innerHTML = `
+                <div style="background:#fff; width:90%; max-width:800px; max-height:90vh; overflow-y:auto; position:relative; padding:30px; border-radius:8px; display:flex; flex-wrap:wrap; gap:30px;">
+                    <span id="close-quickview" style="position:absolute; right:20px; top:10px; font-size:28px; cursor:pointer; font-weight:bold;">&times;</span>
+                    <div style="flex:1; min-width:300px;"><img id="qv-image" src="" style="width:100%; border-radius:4px;"></div>
+                    <div style="flex:1; min-width:300px;">
+                        <h2 id="qv-name" style="margin-top:0;"></h2>
+                        <p id="qv-price" style="font-size:24px; color:#e46a4b; font-weight:700; margin:20px 0;"></p>
+                        <div id="qv-desc" style="margin-bottom:20px; color:#666;"></div>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input type="number" id="qv-qty" value="1" min="1" style="width:60px; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                            <button id="qv-add-btn" class="button" style="background:#e46a4b; color:#fff; border:none; padding:10px 25px; border-radius:4px; cursor:pointer; font-weight:600;">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>`;
+            document.body.appendChild(modal);
+
+            document.getElementById('close-quickview').onclick = () => modal.style.display = 'none';
+            modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+        }
+
+        // Global listener for quickview buttons
+        document.addEventListener('click', async (e) => {
+            const btn = e.target.closest('.quickview-button, .quickview');
+            if (!btn) return;
+            e.preventDefault();
+
+            const productId = btn.getAttribute('data-product_id');
+            const products = await this.getProducts();
+            const p = products.find(item => String(item.id) === String(productId));
+
+            if (p) {
+                document.getElementById('qv-image').src = p.main_image;
+                document.getElementById('qv-name').textContent = p.name;
+                document.getElementById('qv-price').innerHTML = `KSh ${p.price}`;
+                document.getElementById('qv-desc').textContent = p.short_description || 'Premium quality stationery product.';
+                
+                const addBtn = document.getElementById('qv-add-btn');
+                addBtn.onclick = () => {
+                    const qty = parseInt(document.getElementById('qv-qty').value) || 1;
+                    this.addToCart({...p, quantity: qty});
+                    document.getElementById('bwp-quickview-modal').style.display = 'none';
+                    // Show notification (assuming it's defined in add-to-cart.js or globally)
+                    if (window.showThemeNotification) window.showThemeNotification(p.name);
+                };
+                
+                document.getElementById('bwp-quickview-modal').style.display = 'flex';
+            }
+        });
     }
 };
 
 // Auto-initialize UI on load
-document.addEventListener('DOMContentLoaded', () => cartManager.updateThemeUI());
+document.addEventListener('DOMContentLoaded', () => {
+    cartManager.updateThemeUI();
+    cartManager.initQuickView();
+});

@@ -2,18 +2,8 @@
 <html lang="en-US">
 <!--<![endif]-->
 <head>
-<script>
-    // Prevent WordPress/WooCommerce from hijacking the static site routing
-    (function() {
-        const noop = () => {};
-        // // window.location.reload = noop; // Be careful with this, but helpful if loops persist
-        window.history.pushState = noop;
-        window.history.replaceState = noop;
-        
-        // Block Simply Static's own redirect logic if it still exists
-        window.SimplyStatic = { redirect: function(){} };
-    })();
-</script>
+<script src="cart.js"></script>
+<script src="add-to-cart.js"></script>
 <meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width">
@@ -981,7 +971,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 					</a>
 				</div> 
 				<div class="form-search">
-						<form role="search" method="get" class="search-from " action="/" data-admin="/#" data-noresult="Sorry No Results Found" data-limit="6">
+						<form role="search" method="get" class="search-from " action="shop.html" data-admin="/#" data-noresult="Sorry No Results Found" data-limit="6">
 			
 		<div class="search-box">
 			<button id="searchsubmit" class="btn" type="submit">
@@ -1231,14 +1221,13 @@ let allProducts = [];
 const pageSize = 12;
 
 async function loadShop() {
+    console.log("loadShop triggered");
     try {
-        if (allProducts.length === 0) {
-            const response = await fetch('products.json');
-            allProducts = await response.json();
-        }
-
         const params = new URLSearchParams(window.location.search);
+        // Use cached products from cartManager
+        const allProducts = await cartManager.getProducts();
         const catFilter = params.get('category');
+        const searchFilter = params.get('s');
         const sortFilter = params.get('orderby') || 'menu_order';
         const minPrice = parseFloat(params.get('min_price')) || 0;
         const maxPrice = parseFloat(params.get('max_price')) || 999999;
@@ -1256,13 +1245,23 @@ async function loadShop() {
             });
         }
 
-        // 2. Price Filter
+        // 2. Search Filter (s parameter)
+        if (searchFilter) {
+            const s = searchFilter.toLowerCase();
+            filtered = filtered.filter(p => 
+                p.name.toLowerCase().includes(s) || 
+                p.category.toLowerCase().includes(s) ||
+                p.slug.toLowerCase().includes(s)
+            );
+        }
+
+        // 3. Price Filter
         filtered = filtered.filter(p => {
             const price = parseFloat(p.price);
             return price >= minPrice && price <= maxPrice;
         });
 
-        // 3. Sorting
+        // 4. Sorting
         if (sortFilter === 'price') {
             filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         } else if (sortFilter === 'price-desc') {
@@ -1276,11 +1275,14 @@ async function loadShop() {
         const pageProducts = filtered.slice(start, start + pageSize);
 
         renderProducts(pageProducts);
-        renderPagination(currentPage, totalPages, catFilter, sortFilter, minPrice, maxPrice);
+        renderPagination(currentPage, totalPages, catFilter, sortFilter, minPrice, maxPrice, searchFilter);
         
         // Update Title
         const titleEl = document.querySelector('.text-title-heading');
-        if (titleEl) titleEl.textContent = catFilter ? catFilter.toUpperCase().replace(/[_-]/g, ' ') : 'SHOP';
+        if (titleEl) {
+            if (searchFilter) titleEl.textContent = `Search: ${searchFilter.toUpperCase()}`;
+            else titleEl.textContent = catFilter ? catFilter.toUpperCase().replace(/[_-]/g, ' ') : 'SHOP';
+        }
 
     } catch (e) {
         console.error("Error loading shop products:", e);
@@ -1332,10 +1334,11 @@ function renderProducts(products) {
     `).join('');
 }
 
-function renderPagination(current, total, category, orderby, min, max) {
+function renderPagination(current, total, category, orderby, min, max, search) {
     const navs = document.querySelectorAll('.woocommerce-pagination');
     const params = new URLSearchParams();
     if (category) params.set('category', category);
+    if (search) params.set('s', search);
     if (orderby) params.set('orderby', orderby);
     if (min > 0) params.set('min_price', min);
     if (max < 999999) params.set('max_price', max);
@@ -1368,8 +1371,7 @@ function renderPagination(current, total, category, orderby, min, max) {
 // Sidebar Helpers
 async function renderSidebarFeatured() {
     try {
-        const response = await fetch('products.json');
-        const allProducts = await response.json();
+        const allProducts = await cartManager.getProducts();
         const featuredList = document.querySelector('.bwp-feature-product_widget .content-products');
         if (!featuredList) return;
         const featured = allProducts.slice(0, 3);
@@ -1392,18 +1394,19 @@ function setupSidebarListeners() {
 
     // Categories (Sidebar, Top Carousel, and Archives)
     const allCatLinks = document.querySelectorAll('.bwp-filter-category a, .wp-block-categories-list a, .woocommerce-product-subcategories a');
-    allCatLinks.forEach(a => {
+        allCatLinks.forEach(a => {
         a.addEventListener('click', function(e) {
             e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
             
             const url = new URL(this.href, window.location.origin);
             let cat = url.searchParams.get('category');
             
-            // Handle links that might only have text content but no param yet
             if(!cat) {
                 const href = this.getAttribute('href');
-                if(href.includes('category=')) {
+                if(href && href.includes('category=')) {
                     cat = href.split('category=')[1].split('&')[0];
+                } else if (href && href.includes('product_cat=')) {
+                    cat = href.split('product_cat=')[1].split('&')[0];
                 } else {
                     cat = this.textContent.split('(')[0].trim().toLowerCase().replace(/\s+/g, '-');
                 }
@@ -1411,17 +1414,17 @@ function setupSidebarListeners() {
 
             console.log("Filtering by category:", cat);
             
-            const params = new URLSearchParams(window.location.search);
-            if (cat) params.set('category', cat);
-            else params.delete('category');
+            // Clear search and price filters when explicitly selecting a category
+            const params = new URLSearchParams();
+            if (cat && cat !== 'shop' && cat !== 'all') params.set('category', cat);
             
-            params.set('paged', '1'); // Reset to page 1 on filter change
+            params.set('paged', '1');
             
             window.history.pushState({}, '', `shop.html?${params.toString()}`);
             loadShop();
             
-            // Scroll to top of products
-            document.getElementById('bwp-main').scrollIntoView({ behavior: 'smooth' });
+            const mainContent = document.getElementById('bwp-main') || document.querySelector('.main-archive-product');
+            if (mainContent) mainContent.scrollIntoView({ behavior: 'smooth' });
         }, true);
     });
 
@@ -1454,8 +1457,12 @@ function setupSidebarListeners() {
     if (priceForm) {
         priceForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const min = document.getElementById('price-filter-min-text').value;
-            const max = document.getElementById('price-filter-max-text').value;
+            const minInput = document.getElementById('price-filter-min-text');
+            const maxInput = document.getElementById('price-filter-max-text');
+            if (!minInput || !maxInput) return;
+            
+            const min = minInput.value;
+            const max = maxInput.value;
             const params = new URLSearchParams(window.location.search);
             params.set('min_price', min);
             params.set('max_price', max);
@@ -1482,6 +1489,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSidebarFeatured();
     setupSidebarListeners();
 });
+
+window.addEventListener('popstate', loadShop);
 </script>
 
 <!-- Technical Bridge for Rappod Child Theme -->
@@ -1489,3 +1498,4 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="add-to-cart.js"></script>
 </body>
 </html>
+
