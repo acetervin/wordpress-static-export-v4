@@ -991,7 +991,7 @@ Stationery Supplies</sr7-txt>
 						<div class="elementor-container elementor-column-gap-default">
 					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2e17171" data-id="2e17171" data-element_type="column" data-e-type="column">
 			<div class="elementor-widget-wrap elementor-element-populated">
-						<div class="elementor-element elementor-element-45b4eba elementor-widget elementor-widget-bwp_filter_homepage" data-id="45b4eba" data-element_type="widget" data-e-type="widget" data-widget_type="bwp_filter_homepage.default">
+						<div class="elementor-element elementor-element-45b4eba elementor-widget elementor-widget-bwp_filter_homepage_technical" data-id="45b4eba" data-element_type="widget" data-e-type="widget" data-widget_type="bwp_filter_homepage_technical.default">
 				<div class="elementor-widget-container">
 					<div class="bwp-filter-homepage tab-product slider bwp_slick-margin-mobile tab_product_slider" data-numberposts="15">
 	<div class="bwp-filter-heading">
@@ -1590,18 +1590,18 @@ async function loadHomeProducts(filter = 'date') {
         
         let displayProducts = [...allProducts];
         
-        if (filter === 'popularity' || filter === 'featured') {
-            // Sort by ID descending as a proxy for popularity/newest
+        if (filter === 'popularity') {
             displayProducts.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+            displayProducts = displayProducts.slice(5, 15);
         } else if (filter === 'rating') {
-            // Just some fixed shuffle or specific slice
-            displayProducts = displayProducts.slice(10, 20);
+            displayProducts.sort((a, b) => a.name.localeCompare(b.name));
+            displayProducts = displayProducts.slice(0, 10);
+        } else if (filter === 'featured') {
+            displayProducts = displayProducts.reverse().slice(0, 10);
         } else {
-            // Default newest (by ID)
             displayProducts.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+            displayProducts = displayProducts.slice(0, 10);
         }
-        
-        displayProducts = displayProducts.slice(0, 10);
         
         grid.innerHTML = displayProducts.map(p => `
             <div class="item col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
@@ -1659,13 +1659,32 @@ async function loadHomeProducts(filter = 'date') {
 document.addEventListener('DOMContentLoaded', () => {
     loadHomeProducts();
     
+    // Force hide any theme loading elements
+    const style = document.createElement('style');
+    style.textContent = '.loading-filter, .bwp-filter-content:after { display: none !important; } .bwp-filter-content.active:after { display: none !important; }';
+    document.head.appendChild(style);
+
     const tabs = document.querySelectorAll('.filter-orderby li');
     tabs.forEach(tab => {
-        tab.onclick = function() {
+        // Use a more aggressive event listener
+        tab.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
             const filterValue = this.getAttribute('data-value');
             tabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
             loadHomeProducts(filterValue);
+        }, true); // Use capture phase
+        
+        // Also keep the onclick just in case
+        tab.onclick = function(e) {
+            if(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            return false;
         };
     });
 });
