@@ -1232,43 +1232,69 @@ const pageSize = 12;
 
 async function loadShop() {
     try {
-        const response = await fetch('products.json');
-        allProducts = await response.json();
-        
+        if (allProducts.length === 0) {
+            const response = await fetch('products.json');
+            allProducts = await response.json();
+        }
+
         const params = new URLSearchParams(window.location.search);
         const catFilter = params.get('category');
+        const sortFilter = params.get('orderby') || 'menu_order';
+        const minPrice = parseFloat(params.get('min_price')) || 0;
+        const maxPrice = parseFloat(params.get('max_price')) || 999999;
         const currentPage = parseInt(params.get('paged')) || 1;
-        
-        
-        let filtered = allProducts;
+
+        let filtered = [...allProducts];
+
+        // 1. Category Filter
         if (catFilter) {
-            // Match against category name OR slug, case-insensitive
-            // Also handle underscores and hyphens in the URL
             const searchStr = catFilter.toLowerCase().replace(/[_-]/g, ' ');
-            filtered = allProducts.filter(p => {
+            filtered = filtered.filter(p => {
                 const pCat = p.category.toLowerCase().replace(/[_-]/g, ' ');
                 const pSlug = p.slug.toLowerCase().replace(/[_-]/g, ' ');
                 return pCat.includes(searchStr) || pSlug.includes(searchStr);
             });
         }
-    
+
+        // 2. Price Filter
+        filtered = filtered.filter(p => {
+            const price = parseFloat(p.price);
+            return price >= minPrice && price <= maxPrice;
+        });
+
+        // 3. Sorting
+        if (sortFilter === 'price') {
+            filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        } else if (sortFilter === 'price-desc') {
+            filtered.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        } else if (sortFilter === 'popularity' || sortFilter === 'date' || sortFilter === 'rating') {
+            filtered.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+        }
 
         const totalPages = Math.ceil(filtered.length / pageSize);
         const start = (currentPage - 1) * pageSize;
-        const end = start + pageSize;
-        const pageProducts = filtered.slice(start, end);
+        const pageProducts = filtered.slice(start, start + pageSize);
 
         renderProducts(pageProducts);
-        renderPagination(currentPage, totalPages, catFilter);
-        setupSidebarLinks();
+        renderPagination(currentPage, totalPages, catFilter, sortFilter, minPrice, maxPrice);
+        
+        // Update Title
+        const titleEl = document.querySelector('.text-title-heading');
+        if (titleEl) titleEl.textContent = catFilter ? catFilter.toUpperCase().replace(/[_-]/g, ' ') : 'SHOP';
+
     } catch (e) {
-        console.error("Error loading products:", e);
+        console.error("Error loading shop products:", e);
     }
 }
 
 function renderProducts(products) {
     const grid = document.getElementById('shop-grid');
     if (!grid) return;
+    
+    if (products.length === 0) {
+        grid.innerHTML = '<div class="col-12"><p class="woocommerce-info">No products found matching your selection.</p></div>';
+        return;
+    }
 
     grid.innerHTML = products.map(p => `
         <li class="col-lg-4 col-md-4 col-sm-4 col-6 post-${p.id} product type-product status-publish has-post-thumbnail">
@@ -1293,23 +1319,10 @@ function renderProducts(products) {
                             </a>
                         </span>
                     </div>
-                    <div class="product-button-mobile">
-                        <div class="woosw-wishlist" data-title="Wishlist">
-                            <button class="woosw-btn woosw-btn-${p.id}" data-id="${p.id}">Add to wishlist</button>
-                        </div>
-                        <span class="product-quickview" data-title="Quick View">
-                            <a href="#" data-product_id="${p.id}" class="quickview quickview-button quickview-${p.id}">
-                                <span>Quick View</span>
-                            </a>
-                        </span>
-                    </div>
                 </div>
                 <div class="products-content">
                     <div class="contents">
-                        <div class="rating none">
-                            <div class="star-rating none"></div>
-                            <div class="review-count">0 review</div>
-                        </div>
+                        <div class="rating none"><div class="star-rating none"></div><div class="review-count">0 review</div></div>
                         <h3 class="product-title"><a href="product.html?product=${p.slug}">${p.name}</a></h3>
                         <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${p.price}</bdi></span></span>
                     </div>
@@ -1319,49 +1332,157 @@ function renderProducts(products) {
     `).join('');
 }
 
-function renderPagination(current, total, category) {
+function renderPagination(current, total, category, orderby, min, max) {
     const navs = document.querySelectorAll('.woocommerce-pagination');
-    const catParam = category ? `&category=${encodeURIComponent(category)}` : '';
+    const params = new URLSearchParams();
+    if (category) params.set('category', category);
+    if (orderby) params.set('orderby', orderby);
+    if (min > 0) params.set('min_price', min);
+    if (max < 999999) params.set('max_price', max);
     
     let html = '<ul class="page-numbers">';
-    
     if (current > 1) {
-        html += `<li><a class="prev page-numbers" href="shop.html?paged=${current - 1}${catParam}">Prev</a></li>`;
+        params.set('paged', current - 1);
+        html += `<li><a class="prev page-numbers" href="shop.html?${params.toString()}">Prev</a></li>`;
     }
 
     for (let i = 1; i <= total; i++) {
+        params.set('paged', i);
         if (i === current) {
             html += `<li><span class="page-numbers current">${i}</span></li>`;
         } else if (i <= 3 || i >= total - 2 || (i >= current - 1 && i <= current + 1)) {
-            html += `<li><a class="page-numbers" href="shop.html?paged=${i}${catParam}">${i}</a></li>`;
+            html += `<li><a class="page-numbers" href="shop.html?${params.toString()}">${i}</a></li>`;
         } else if (i === 4 || i === total - 3) {
             html += `<li><span class="page-numbers dots">...</span></li>`;
         }
     }
-
+    
     if (current < total) {
-        html += `<li><a class="next page-numbers" href="shop.html?paged=${current + 1}${catParam}">Next</a></li>`;
+        params.set('paged', current + 1);
+        html += `<li><a class="next page-numbers" href="shop.html?${params.toString()}">Next</a></li>`;
     }
-    
     html += '</ul>';
-    
     navs.forEach(nav => nav.innerHTML = html);
 }
 
-function setupSidebarLinks() {
-    const links = document.querySelectorAll('.widget_block .cat-item a, .filter_category_product a');
-    links.forEach(a => {
-        const catName = a.textContent.split('(')[0].trim();
-        a.href = `shop.html?category=${encodeURIComponent(catName)}`;
-    });
+// Sidebar Helpers
+async function renderSidebarFeatured() {
+    try {
+        const response = await fetch('products.json');
+        const allProducts = await response.json();
+        const featuredList = document.querySelector('.bwp-feature-product_widget .content-products');
+        if (!featuredList) return;
+        const featured = allProducts.slice(0, 3);
+        featuredList.innerHTML = featured.map(p => `
+            <li class="item-product">
+                <div class="item-thumb"><a href="product.html?product=${p.slug}"><img src="${p.main_image}" alt=""></a></div>
+                <div class="content-bottom">
+                    <div class="rating none"><div class="star-rating none"></div></div>
+                    <div class="item-title"><a href="product.html?product=${p.slug}">${p.name}</a></div>
+                    <div class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${p.price}</bdi></span></div>
+                </div>
+            </li>`).join('');
+    } catch(e) {}
 }
 
-window.addEventListener('DOMContentLoaded', loadShop);
+function setupSidebarListeners() {
+    // Stop the theme's filter script
+    const filterContainer = document.querySelector('.bwp-woocommerce-filter-product');
+    if (filterContainer) filterContainer.id = 'technical-filter-bypass';
+
+    // Categories (Sidebar, Top Carousel, and Archives)
+    const allCatLinks = document.querySelectorAll('.bwp-filter-category a, .wp-block-categories-list a, .woocommerce-product-subcategories a');
+    allCatLinks.forEach(a => {
+        a.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+            
+            const url = new URL(this.href, window.location.origin);
+            let cat = url.searchParams.get('category');
+            
+            // Handle links that might only have text content but no param yet
+            if(!cat) {
+                const href = this.getAttribute('href');
+                if(href.includes('category=')) {
+                    cat = href.split('category=')[1].split('&')[0];
+                } else {
+                    cat = this.textContent.split('(')[0].trim().toLowerCase().replace(/\s+/g, '-');
+                }
+            }
+
+            console.log("Filtering by category:", cat);
+            
+            const params = new URLSearchParams(window.location.search);
+            if (cat) params.set('category', cat);
+            else params.delete('category');
+            
+            params.set('paged', '1'); // Reset to page 1 on filter change
+            
+            window.history.pushState({}, '', `shop.html?${params.toString()}`);
+            loadShop();
+            
+            // Scroll to top of products
+            document.getElementById('bwp-main').scrollIntoView({ behavior: 'smooth' });
+        }, true);
+    });
+
+    // Brands
+    document.querySelectorAll('.bwp-filter-brand a').forEach(a => {
+        a.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+            const params = new URLSearchParams(window.location.search);
+            params.set('paged', '1');
+            window.history.pushState({}, '', `shop.html?${params.toString()}`);
+            loadShop();
+        }, true);
+    });
+
+    // Sorting
+    document.querySelectorAll('.pwb-dropdown-menu li a').forEach(a => {
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = new URL(this.href, window.location.origin);
+            const orderby = url.searchParams.get('orderby');
+            const params = new URLSearchParams(window.location.search);
+            if (orderby) params.set('orderby', orderby);
+            window.history.pushState({}, '', `shop.html?${params.toString()}`);
+            loadShop();
+        });
+    });
+
+    // Price Filter Form
+    const priceForm = document.getElementById('bwp_form_filter_product');
+    if (priceForm) {
+        priceForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const min = document.getElementById('price-filter-min-text').value;
+            const max = document.getElementById('price-filter-max-text').value;
+            const params = new URLSearchParams(window.location.search);
+            params.set('min_price', min);
+            params.set('max_price', max);
+            window.history.pushState({}, '', `shop.html?${params.toString()}`);
+            loadShop();
+        });
+        // Add a filter button if it's missing (themes often use auto-submit with AJAX)
+        if (!priceForm.querySelector('button[type="submit"]')) {
+            const btn = document.createElement('button');
+            btn.type = 'submit';
+            btn.textContent = 'Filter Price';
+            btn.className = 'button';
+            btn.style.marginTop = '10px';
+            priceForm.appendChild(btn);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const style = document.createElement('style');
+    style.textContent = '.loading-filter, .bwp-filter-content:after, .main-archive-product:after { display: none !important; }';
+    document.head.appendChild(style);
+    loadShop();
+    renderSidebarFeatured();
+    setupSidebarListeners();
+});
 </script>
-
-
-
-
 
 <!-- Technical Bridge for Rappod Child Theme -->
 <script src="cart.js"></script>
