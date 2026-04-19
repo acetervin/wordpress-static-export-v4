@@ -12,6 +12,34 @@
         
         // Block Simply Static's own redirect logic if it still exists
         window.SimplyStatic = { redirect: function(){} };
+    // Intercept and Silence failing WooCommerce/Wishlist AJAX calls
+    (function($) {
+        if (!$) return;
+        const originalAjax = $.ajax;
+        $.ajax = function(options) {
+            if (options.url && (options.url.includes('wc-ajax=') || options.url.includes('simply_static_page'))) {
+                console.log('Silenced technical AJAX call:', options.url);
+                if (options.success) options.success({ success: true, fragments: {}, data: {} });
+                return $.Deferred().resolve({ success: true }).promise();
+            }
+            return originalAjax.apply(this, arguments);
+        };
+    })(window.jQuery);
+    
+    // Intercept and Silence failing WooCommerce/Wishlist AJAX calls
+    (function($) {
+        if (!$) return;
+        const originalAjax = $.ajax;
+        $.ajax = function(options) {
+            if (options.url && (options.url.includes('wc-ajax=') || options.url.includes('simply_static_page'))) {
+                console.log('Silenced technical AJAX call:', options.url);
+                if (options.success) options.success({ success: true, fragments: {}, data: {} });
+                return $.Deferred().resolve({ success: true }).promise();
+            }
+            return originalAjax.apply(this, arguments);
+        };
+    })(window.jQuery);
+    
     })();
 </script>
 <meta charset="UTF-8">
@@ -75,7 +103,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=woosw-frontend-inline-css */
 </style>
 <link rel="stylesheet" id="rappod-wp-fonts-catamaran-css" href="https://fonts.googleapis.com/css2?family=Catamaran%3Awght%40100%3B200%3B300%3B400%3B500%3B600%3B700%3B800%3B900&amp;display=swap&amp;ver=6.9.4" type="text/css" media="all">
-<link rel="stylesheet" id="rappod-style-css" href="/wp-content/themes/rappod-child/style.css?ver=6.9.4" type="text/css" media="all">
+<link rel="stylesheet" id="rappod-style-css" href="/wp-content/themes/rappod/style.css?ver=6.9.4" type="text/css" media="all">
 <link rel="stylesheet" id="bootstrap-css" href="/wp-content/themes/rappod/css/bootstrap.css?ver=6.9.4" type="text/css" media="all">
 <link rel="stylesheet" id="circlestime-css" href="/wp-content/themes/rappod/css/jquery.circlestime.css" type="text/css" media="all">
 <link rel="stylesheet" id="mmenu-all-css" href="/wp-content/themes/rappod/css/jquery.mmenu.all.css?ver=6.9.4" type="text/css" media="all">
@@ -97,7 +125,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="stylesheet" id="widget-heading-css" href="/wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=3.35.5" type="text/css" media="all">
 <link rel="stylesheet" id="widget-image-css" href="/wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=3.35.5" type="text/css" media="all">
 <link rel="stylesheet" id="widget-icon-list-css" href="/wp-content/uploads/elementor/css/custom-widget-icon-list.min.css?ver=1776327499" type="text/css" media="all">
-<link rel="stylesheet" id="styles-child-css" href="/wp-content/themes/rappod-child/style.css?ver=6.9.4" type="text/css" media="all">
+<link rel="stylesheet" id="styles-child-css" href="/wp-content/themes/rappod/style.css?ver=6.9.4" type="text/css" media="all">
 <script type="text/template" id="tmpl-variation-template">
 	<div class="woocommerce-variation-description">{{{ data.variation.variation_description }}}</div>
 	<div class="woocommerce-variation-price">{{{ data.variation.price_html }}}</div>
@@ -389,7 +417,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="box-form-login">
 				<div class="active-login"></div>
 										<div class="sign__in--img">
-							<img src="/wp-content/uploads/2023/11/login.jpg" alt="Image Sign In">
+							<img src="/wp-content/uploads/2023/11/banner-45.jpg" alt="Image Sign In">
 							<h2 class="title-sign">Sign in</h2>
 							<h2 class="title-register hidden">Register</h2>
 						</div>
@@ -918,7 +946,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			<div class="box-form-login">
 				<div class="active-login"></div>
 										<div class="sign__in--img">
-							<img src="/wp-content/uploads/2023/11/login.jpg" alt="Image Sign In">
+							<img src="/wp-content/uploads/2023/11/banner-45.jpg" alt="Image Sign In">
 							<h2 class="title-sign">Sign in</h2>
 							<h2 class="title-register hidden">Register</h2>
 						</div>
@@ -1037,7 +1065,7 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 			</div>
 			</div>
 	<div class="attribute-mobile-content quick-shop"></div>
-		<div id="woosw_wishlist" class="woosw-popup woosw-popup-center"></div>	<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script type='text/javascript'>
+		<div id="woosw_wishlist" class="woosw-popup woosw-popup-center"></div>	<script data-cfasync="false" src="" style="display:none;" defer></script><script type='text/javascript'>
 		(function () {
 			var c = document.body.className;
 			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
