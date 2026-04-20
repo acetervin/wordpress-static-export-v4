@@ -1284,6 +1284,19 @@ async function loadShop() {
             else titleEl.textContent = catFilter ? catFilter.toUpperCase().replace(/[_-]/g, ' ') : 'SHOP';
         }
 
+        // Update Sorting Label
+        const sortLabels = {
+            'menu_order': 'Default sorting',
+            'popularity': 'Sort by popularity',
+            'rating': 'Sort by average rating',
+            'date': 'Sort by latest',
+            'price': 'Sort by price: low to high',
+            'price-desc': 'Sort by price: high to low'
+        };
+        const activeSortLabel = sortLabels[sortFilter] || 'Default sorting';
+        const toggleBtn = document.querySelector('.pwb-dropdown-toggle');
+        if (toggleBtn) toggleBtn.textContent = activeSortLabel;
+
     } catch (e) {
         console.error("Error loading shop products:", e);
     }
@@ -1440,16 +1453,25 @@ function setupSidebarListeners() {
     });
 
     // Sorting
-    document.querySelectorAll('.pwb-dropdown-menu li a').forEach(a => {
+    document.querySelectorAll('.woocommerce-ordering a, .pwb-dropdown-menu li a').forEach(a => {
         a.addEventListener('click', function(e) {
-            e.preventDefault();
+            e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+            
             const url = new URL(this.href, window.location.origin);
             const orderby = url.searchParams.get('orderby');
             const params = new URLSearchParams(window.location.search);
+            
             if (orderby) params.set('orderby', orderby);
+            
+            console.log("Sorting by:", orderby);
             window.history.pushState({}, '', `shop.html?${params.toString()}`);
             loadShop();
-        });
+
+            // Force hide any loading skeletons the theme might have triggered
+            const skeletons = document.querySelectorAll('.loading-filter, .bwp-filter-content:after, .main-archive-product:after');
+            skeletons.forEach(s => s.style.display = 'none');
+            document.body.classList.remove('loading');
+        }, true);
     });
 
     // Price Filter Form
