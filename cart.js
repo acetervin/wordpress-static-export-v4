@@ -51,75 +51,84 @@ const cartManager = {
      * Reconstructs the Rappod mini-cart using exact theme classes and structure.
      */
     updateThemeUI() {
-        const count = this.getCount();
-        const total = this.getTotal();
-        const cart = this.getCart();
-        
-        // 1. Update all theme cart count badges
-        document.querySelectorAll('.cart-count').forEach(el => el.textContent = count);
-        
-        // 2. Update theme's native cart summary text
-        document.querySelectorAll('.top-total-cart').forEach(el => {
-            el.textContent = `Shopping Cart(${count})`;
-        });
-        
-        // 3. Update woocommerce header data attribute
-        document.querySelectorAll('.woocommerce-cart-header').forEach(el => {
-            el.setAttribute('data-count', count);
-        });
+        try {
+            const count = this.getCount();
+            const total = this.getTotal();
+            const cart = this.getCart();
+            
+            // 1. Update all theme cart count badges
+            document.querySelectorAll('.cart-count').forEach(el => el.textContent = count);
+            
+            // 2. Update theme's native cart summary text
+            document.querySelectorAll('.top-total-cart').forEach(el => {
+                el.textContent = `Shopping Cart(${count})`;
+            });
+            
+            // 3. Update woocommerce header data attribute
+            document.querySelectorAll('.woocommerce-cart-header').forEach(el => {
+                el.setAttribute('data-count', count);
+            });
 
-        // 4. Update Mini-Cart Popup Content (Rappod Theme Exact Markup)
-        const miniCartForms = document.querySelectorAll('.cart-popup .cart-header-form');
-        miniCartForms.forEach(form => {
-            const container = form.querySelector('.shop_table');
-            if (!container) return;
+            // 4. Update Mini-Cart Popup Content (Rappod Theme Exact Markup)
+            const miniCartForms = document.querySelectorAll('.cart-popup .cart-header-form');
+            miniCartForms.forEach(form => {
+                const container = form.querySelector('.shop_table');
+                if (!container) return;
 
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="empty">
-                        <span>Your cart is currently empty.</span>
-                        <a class="go-shop" href="/shop.html">Shop all products</a>
-                    </div>`;
-                // Clear the footer if it exists
-                const footer = form.closest('.cart-details').nextElementSibling;
-                if (footer && footer.classList.contains('widget_shopping_cart')) {
-                    footer.querySelector('.widget_shopping_cart_content').innerHTML = '<div class="ajaxcart__footer"></div>';
+                if (cart.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty">
+                            <span>Your cart is currently empty.</span>
+                            <a class="go-shop" href="shop.html">Shop all products</a>
+                        </div>`;
+                    
+                    // Clear the footer if it exists
+                    const cartDetails = form.closest('.cart-details');
+                    if (cartDetails && cartDetails.nextElementSibling) {
+                        const widgetFooter = cartDetails.nextElementSibling.querySelector('.widget_shopping_cart_content');
+                        if (widgetFooter) widgetFooter.innerHTML = '<div class="ajaxcart__footer"></div>';
+                    }
+                } else {
+                    // Rappod Theme Native List Markup
+                    let listHtml = '<ul class="cart_list product_list_widget ">';
+                    cart.forEach(item => {
+                        listHtml += `
+                            <li class="mini_cart_item">
+                                <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" onclick="event.preventDefault(); cartManager.removeItem('${item.id}')">×</a>
+                                <a href="product.html?product=${item.slug}">
+                                    <img width="300" height="300" src="${item.image}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
+                                    ${item.name}
+                                </a>
+                                <span class="quantity">${item.quantity} × <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${item.price.toLocaleString('en-KE', {minimumFractionDigits: 2})}</bdi></span></span>
+                            </li>`;
+                    });
+                    listHtml += '</ul>';
+                    container.innerHTML = listHtml;
+
+                    // Update the Widget Footer (Total and Buttons)
+                    const cartDetails = form.closest('.cart-details');
+                    if (cartDetails && cartDetails.nextElementSibling) {
+                        const widgetFooter = cartDetails.nextElementSibling.querySelector('.widget_shopping_cart_content');
+                        if (widgetFooter) {
+                            widgetFooter.innerHTML = `
+                                <p class="woocommerce-mini-cart__total total">
+                                    <strong>Subtotal:</strong> 
+                                    <span class="woocommerce-Price-amount amount">
+                                        <bdi><span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${total.toLocaleString('en-KE', {minimumFractionDigits: 2})}</bdi>
+                                    </span>
+                                </p>
+                                <p class="woocommerce-mini-cart__buttons buttons">
+                                    <a href="cart.html" class="button wc-forward">View cart</a>
+                                    <a href="checkout.html" class="button checkout wc-forward">Checkout</a>
+                                </p>
+                                <div class="ajaxcart__footer"></div>`;
+                        }
+                    }
                 }
-            } else {
-                // Rappod Theme Native List Markup
-                let listHtml = '<ul class="cart_list product_list_widget ">';
-                cart.forEach(item => {
-                    listHtml += `
-                        <li class="mini_cart_item">
-                            <a href="#" class="remove remove_from_cart_button" aria-label="Remove this item" onclick="event.preventDefault(); cartManager.removeItem('${item.id}')">×</a>
-                            <a href="product.html?product=${item.slug}">
-                                <img width="300" height="300" src="${item.image}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
-                                ${item.name}
-                            </a>
-                            <span class="quantity">${item.quantity} × <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${item.price.toLocaleString('en-KE', {minimumFractionDigits: 2})}</bdi></span></span>
-                        </li>`;
-                });
-                listHtml += '</ul>';
-                container.innerHTML = listHtml;
-
-                // Update the Widget Footer (Total and Buttons)
-                const widgetFooter = form.closest('.cart-details').parentElement.querySelector('.widget_shopping_cart_content');
-                if (widgetFooter) {
-                    widgetFooter.innerHTML = `
-                        <p class="woocommerce-mini-cart__total total">
-                            <strong>Subtotal:</strong> 
-                            <span class="woocommerce-Price-amount amount">
-                                <bdi><span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${total.toLocaleString('en-KE', {minimumFractionDigits: 2})}</bdi>
-                            </span>
-                        </p>
-                        <p class="woocommerce-mini-cart__buttons buttons">
-                            <a href="cart.html" class="button wc-forward">View cart</a>
-                            <a href="checkout.html" class="button checkout wc-forward">Checkout</a>
-                        </p>
-                        <div class="ajaxcart__footer"></div>`;
-                }
-            }
-        });
+            });
+        } catch (err) {
+            console.warn("[Bridge] Non-critical error updating UI:", err);
+        }
     },
 
     removeItem(id) {
@@ -146,22 +155,21 @@ const cartManager = {
             '../products.json'
         ];
         
-        console.log("Attempting to load products.json from paths:", paths);
-        
         for (const path of paths) {
             try {
                 const response = await fetch(path);
                 if (response.ok) {
                     window._productCache = await response.json();
-                    console.log(`Successfully loaded ${window._productCache.length} products from ${path}`);
+                    console.log(`[Bridge] Successfully loaded ${window._productCache.length} products from ${path}`);
                     return window._productCache;
                 }
             } catch (e) {
-                // Continue
+                // Silently continue to next path
             }
         }
         
-        console.error("Failed to fetch products from any known path");
+        console.error("[Bridge] Critical: Failed to fetch products.json from any known path. Shop features will be disabled.");
+        window._productCache = [];
         return [];
     },
 

@@ -9,7 +9,6 @@
         // // window.location.reload = noop; // Be careful with this, but helpful if loops persist
         window.history.pushState = noop;
         window.history.replaceState = noop;
-        
         // Block Simply Static's own redirect logic if it still exists
         window.SimplyStatic = { redirect: function(){} };
     // Intercept and Silence failing WooCommerce/Wishlist AJAX calls
@@ -25,7 +24,6 @@
             return originalAjax.apply(this, arguments);
         };
     })(window.jQuery);
-    
     // Intercept and Silence failing WooCommerce/Wishlist AJAX calls
     (function($) {
         if (!$) return;
@@ -39,29 +37,20 @@
             return originalAjax.apply(this, arguments);
         };
     })(window.jQuery);
-    
     })();
 </script>
 <script src="cart.js"></script>
 <script src="add-to-cart.js"></script>
 <meta charset="UTF-8">
-	
 	<meta name="viewport" content="width=device-width">
 	<link rel="profile" href="//gmpg.org/xfn/11">
 	<title id="p-meta-title">Product Detail – StationaryCentralDepot</title>
 <meta name="robots" content="max-image-preview:large">
-<link rel="dns-prefetch" href="//fonts.googleapis.com">
-<link rel="alternate" type="application/rss+xml" title="StationaryCentralDepot » Feed" href="/feed=rss2/">
-<link rel="alternate" type="application/rss+xml" title="StationaryCentralDepot » Comments Feed" href="/feed=comments-rss2/">
-<link rel="alternate" type="application/rss+xml" title="StationaryCentralDepot » ... Comments Feed" href="/feed=rss2&amp;p=51278/">
-<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="/index?rest_route=%2Foembed%2F1.0%2Fembed&amp;url=%2F%3Fproduct%3Dbag">
-<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="/index?rest_route=%2Foembed%2F1.0%2Fembed&amp;url=%2F%3Fproduct%3Dbag&amp;format=xml">
 <style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
 img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=wp-img-auto-sizes-contain-inline-css */
 </style>
 <style id="wp-emoji-styles-inline-css" type="text/css">
-
 	img.wp-smiley, img.emoji {
 		display: inline !important;
 		border: none !important;
@@ -184,36 +173,22 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
 /* ]]> */
 </script>
 <script type="text/javascript" src="/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js?ver=10.7.0" id="wc-add-to-cart-variation-js" defer="defer" data-wp-strategy="defer"></script>
-<link rel="https://api.w.org/" href="/index?rest_route=%2F"><link rel="alternate" title="JSON" type="application/json" href="/index?rest_route=%2Fwp%2Fv2%2Fproduct%2F51278"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc?rsd">
-<meta name="generator" content="WordPress 6.9.4">
-<meta name="generator" content="WooCommerce 10.7.0">
+<link rel="https://api.w.org/" href="/index?rest_route=%2F"><link rel="alternate" title="JSON" type="application/json" href="/index?rest_route=%2Fwp%2Fv2%2Fproduct%2F51278">
 <link rel="canonical" /product/bag/>
 <link rel="shortlink" href="/p=51278/">
-<meta name="generator" content="Redux 4.5.11">			<style type="text/css">
+			<style type="text/css">
 				/*------------ header 1 ----------*/
-
 /*------------ header 2 ----------*/
-
-
 /*------------ header 3 ----------*/
-
-
 /*------------ header 4 ----------*/
-
-
 /*------------ Menu mobile ----------*/
-
 /*------------ CARD 2 ----------*/
-
-
 /*------------ CARD 3 ----------*/
-
 /*------------ CARD 4 ----------*/
 /*------------ CARD 5 ----------*/
 	</style> 	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<meta name="generator" content="Powered by Slider Revolution 6.7.35 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
 <script>
 	window._tpt			??= {};
 	window.SR7			??= {};
@@ -250,40 +225,32 @@ var wc_add_to_cart_variation_params = {"wc_ajax_url":"/?wc-ajax=%%endpoint%%","i
     height: 50px !important;
     width: 50px !important;
 }		</style>
-		
 <script>
 async function loadProduct() {
     const params = new URLSearchParams(window.location.search);
     let slug = params.get('product');
     if (!slug) return;
-    
     // Use cached products from cartManager
     const products = await cartManager.getProducts();
     const p = products.find(item => item.slug === slug || item.slug === 'product-' + slug);
-
     if (p) {
         document.title = p.name + " – StationaryCentralDepot";
-        
         // Basic Info
         const nameElems = document.querySelectorAll('.product_title, .breadcrumb [itemprop="breadcrumb"] span:last-child');
         nameElems.forEach(el => el.textContent = p.name);
-        
         const priceElems = document.querySelectorAll('.woocommerce-Price-amount.amount');
         priceElems.forEach(el => {
             el.innerHTML = `<span class="woocommerce-Price-currencySymbol">KSh</span>&nbsp;${p.price}`;
         });
-
         // Category
         const catElems = document.querySelectorAll('.posted_in a, .breadcrumb a:nth-child(3)');
         catElems.forEach(el => el.textContent = p.category);
-
         // Images
         const mainImgs = document.querySelectorAll('.wp-post-image, .woocommerce-product-gallery__image img');
         mainImgs.forEach(img => {
             img.src = p.main_image;
             img.srcset = ""; // Clear srcset to force main image
         });
-
         // Gallery Thumbs
         const thumbCont = document.querySelector('.image-thumbnail');
         if (thumbCont && p.gallery.length > 0) {
@@ -295,18 +262,15 @@ async function loadProduct() {
                 </div>
             `).join('');
         }
-
         // Product ID technical updates
         const productDiv = document.querySelector('.product.type-product');
         if (productDiv) {
             productDiv.id = "product-" + p.id;
             productDiv.className = productDiv.className.replace(/post-\d+/, "post-" + p.id);
         }
-        
         // Update Add to Cart button
         const cartBtn = document.querySelector('input[name="add-to-cart"]');
         if (cartBtn) cartBtn.value = p.id;
-        
         const wishlistBtn = document.querySelector('.woosw-btn');
         if (wishlistBtn) {
             wishlistBtn.setAttribute('data-id', p.id);
@@ -391,7 +355,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 	</div>
 </div></div>
 </div>
-
 									</div>
 															</div>
 													</div>
@@ -461,9 +424,7 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 </ul>
 </li>
 </ul></div></nav>
-
 </div>
-
 					</div>
 				</nav> 
 			</div>       
@@ -581,7 +542,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 	</div>
 </div></div>
 </div>
-
 												</div>
 																					</div>
 									</div>
@@ -623,7 +583,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 							</div>																		</div>
 														</div>
 			</div>
-				
 		</div>
 	</figure>
 </div>				</div>
@@ -675,12 +634,7 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 			</li>
 			</ul>
 	<div class="product_meta">
-
-	
-	
 	<span class="posted_in">Category: <a href="shop.html?category=bags-for-her" rel="tag">BAGS FOR HER</a></span>
-	
-	
 </div>
 <div class="social-icon"><label>Share : </label><div class="social-share"><a href="https://www.facebook.com/sharer?u=/?product=bag&amp;i=/wp-content/uploads/2026/02/IMG_8023.jpeg" title="Facebook" class="share-facebook" target="_blank"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/intent/tweet?url=/?product=bag" title="Twitter" class="share-twitter"><i class="icon-x-twitter"></i></a><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=/?product=bag" title="LinkedIn" class="share-linkedin"><i class="fa fa-linkedin"></i></a><a href="https://pinterest.com/pin/create/button/?url=/?product=bag&amp;media=/wp-content/uploads/2026/02/IMG_8023.jpeg" title="Pinterest" class="share-pinterest"><i class="fa fa-pinterest"></i></a></div></div>					</div><!-- .summary -->
 				</div>
@@ -746,8 +700,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 													<div class="products-entry content-product1 clearfix product-wapper">
 		<div class="products-thumb">
 				<div class="product-lable">
-								
-								
 	</div>
 <a href="product.html?product=bag-5" class="woocommerce-LoopProduct-link"><img width="300" height="300" src="/wp-content/uploads/2026/02/IMG_8013-300x300.jpeg" class="fade-in lazyload wp-post-image" alt="" decoding="async"></a>			<div class="product-button">
 				<div class="type_simple" data-title="Add to cart"><a rel="nofollow" /product/bag&amp;add-to-cart=51331/ data-quantity="1" data-product_id="51331" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart"><span>Add to cart</span></a></div><div class="woosw-wishlist" data-title="Wishlist"><button class="woosw-btn woosw-btn-51331" data-id="51331">Add to wishlist</button></div><span class="product-quickview" data-title="Quick View"><a href="#" data-product_id="51331" class="quickview quickview-button quickview-51331"><span>Quick View</span></a></span>			</div>
@@ -762,7 +714,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 				0 review			</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=bag-5">...</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 1,599.00</bdi></span></span>
 			</div>
 		</div>
@@ -770,8 +721,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 													<div class="products-entry content-product1 clearfix product-wapper">
 		<div class="products-thumb">
 				<div class="product-lable">
-								
-								
 	</div>
 <a href="product.html?product=bag-6" class="woocommerce-LoopProduct-link"><img width="300" height="300" src="/wp-content/uploads/2026/02/IMG_8012-300x300.jpeg" class="fade-in lazyload wp-post-image" alt="" decoding="async"></a>			<div class="product-button">
 				<div class="type_simple" data-title="Add to cart"><a rel="nofollow" /product/bag&amp;add-to-cart=51333/ data-quantity="1" data-product_id="51333" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart"><span>Add to cart</span></a></div><div class="woosw-wishlist" data-title="Wishlist"><button class="woosw-btn woosw-btn-51333" data-id="51333">Add to wishlist</button></div><span class="product-quickview" data-title="Quick View"><a href="#" data-product_id="51333" class="quickview quickview-button quickview-51333"><span>Quick View</span></a></span>			</div>
@@ -786,7 +735,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 				0 review			</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=bag-6">...</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 1,599.00</bdi></span></span>
 			</div>
 		</div>
@@ -794,8 +742,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 													<div class="products-entry content-product1 clearfix product-wapper">
 		<div class="products-thumb">
 				<div class="product-lable">
-								
-								
 	</div>
 <a href="product.html?product=bag-7" class="woocommerce-LoopProduct-link"><img loading="lazy" width="300" height="300" src="/wp-content/uploads/2026/02/IMG_8026-300x300.jpeg" class="fade-in lazyload wp-post-image" alt="" decoding="async"></a>			<div class="product-button">
 				<div class="type_simple" data-title="Add to cart"><a rel="nofollow" /product/bag&amp;add-to-cart=51335/ data-quantity="1" data-product_id="51335" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart"><span>Add to cart</span></a></div><div class="woosw-wishlist" data-title="Wishlist"><button class="woosw-btn woosw-btn-51335" data-id="51335">Add to wishlist</button></div><span class="product-quickview" data-title="Quick View"><a href="#" data-product_id="51335" class="quickview quickview-button quickview-51335"><span>Quick View</span></a></span>			</div>
@@ -810,7 +756,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 				0 review			</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=bag-7">...</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 1,599.00</bdi></span></span>
 			</div>
 		</div>
@@ -818,8 +763,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 													<div class="products-entry content-product1 clearfix product-wapper">
 		<div class="products-thumb">
 				<div class="product-lable">
-								
-								
 	</div>
 <a href="product.html?product=bag-14" class="woocommerce-LoopProduct-link"><img loading="lazy" width="300" height="300" src="/wp-content/uploads/2026/02/IMG_8002-300x300.jpeg" class="fade-in lazyload wp-post-image" alt="" decoding="async"></a>			<div class="product-button">
 				<div class="type_simple" data-title="Add to cart"><a rel="nofollow" /product/bag&amp;add-to-cart=51369/ data-quantity="1" data-product_id="51369" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart"><span>Add to cart</span></a></div><div class="woosw-wishlist" data-title="Wishlist"><button class="woosw-btn woosw-btn-51369" data-id="51369">Add to wishlist</button></div><span class="product-quickview" data-title="Quick View"><a href="#" data-product_id="51369" class="quickview quickview-button quickview-51369"><span>Quick View</span></a></span>			</div>
@@ -834,7 +777,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 				0 review			</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=bag-14">...</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 1,599.00</bdi></span></span>
 			</div>
 		</div>
@@ -850,7 +792,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 		<div class="products-thumb">
 				<div class="product-lable">
 									<div class="vgwc-label vgwc-featured hot">Hot</div>						
-								
 	</div>
 <a href="product.html?product=watercolor-brush" class="woocommerce-LoopProduct-link"><img src="/wp-content/themes/rappod/images/placeholder.jpg" alt="No thumb"></a>			<div class="product-button">
 				<div class="type_simple" data-title="Add to cart"><a rel="nofollow" /product/bag&amp;add-to-cart=1061/ data-quantity="1" data-product_id="1061" data-product_sku="" class="button product_type_simple add_to_cart_button ajax_add_to_cart"><span>Add to cart</span></a></div><div class="woosw-wishlist" data-title="Wishlist"><button class="woosw-btn woosw-btn-1061" data-id="1061">Add to wishlist</button></div><span class="product-quickview" data-title="Quick View"><a href="#" data-product_id="1061" class="quickview quickview-button quickview-1061"><span>Quick View</span></a></span>			</div>
@@ -864,7 +805,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 									1<span> review</span>							</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=watercolor-brush">Watercolor Brush</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 250.00</bdi></span></span>
 			</div>
 		</div>
@@ -888,7 +828,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 				0 review			</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=cat-paw">Cat Paw</a></h3>
-				
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 200.00</bdi></span></del> <span class="screen-reader-text">Original price was: KSh 200.00.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 150.00</bdi></span></ins><span class="screen-reader-text">Current price is: KSh 150.00.</span></span>
 			</div>
 		</div>
@@ -896,8 +835,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 													<div class="products-entry content-product1 clearfix product-wapper">
 		<div class="products-thumb">
 				<div class="product-lable">
-								
-								
 	</div>
 <a href="product.html?product=cable-bite-charger" class="woocommerce-LoopProduct-link"><img src="/wp-content/themes/rappod/images/placeholder.jpg" alt="No thumb"></a>			<div class="product-button">
 				<div class="type_simple" data-title="Add to cart"><a rel="nofollow" /product/bag&amp;add-to-cart=10448/ data-quantity="1" data-product_id="10448" data-product_sku="U2006" class="button product_type_simple add_to_cart_button ajax_add_to_cart"><span>Add to cart</span></a></div><div class="woosw-wishlist" data-title="Wishlist"><button class="woosw-btn woosw-btn-10448" data-id="10448">Add to wishlist</button></div><span class="product-quickview" data-title="Quick View"><a href="#" data-product_id="10448" class="quickview quickview-button quickview-10448"><span>Quick View</span></a></span>			</div>
@@ -911,7 +848,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 									1<span> review</span>							</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=cable-bite-charger">Cable Bite Charger</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 200.00</bdi></span></span>
 			</div>
 		</div>
@@ -919,8 +855,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 													<div class="products-entry content-product1 clearfix product-wapper">
 		<div class="products-thumb">
 				<div class="product-lable">
-								
-								
 	</div>
 <a href="product.html?product=campus-key-ring" class="woocommerce-LoopProduct-link"><img src="/wp-content/themes/rappod/images/placeholder.jpg" alt="No thumb"></a>			<div class="product-button">
 				<div class="type_simple" data-title="Add to cart"><a rel="nofollow" /product/bag&amp;add-to-cart=10460/ data-quantity="1" data-product_id="10460" data-product_sku="U2009" class="button product_type_simple add_to_cart_button ajax_add_to_cart"><span>Add to cart</span></a></div><div class="woosw-wishlist" data-title="Wishlist"><button class="woosw-btn woosw-btn-10460" data-id="10460">Add to wishlist</button></div><span class="product-quickview" data-title="Quick View"><a href="#" data-product_id="10460" class="quickview quickview-button quickview-10460"><span>Quick View</span></a></span>			</div>
@@ -934,7 +868,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 									1<span> review</span>							</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=campus-key-ring">Campus Key Ring</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 200.00</bdi></span></span>
 			</div>
 		</div>
@@ -942,7 +875,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 													<div class="products-entry content-product1 clearfix product-wapper">
 		<div class="products-thumb">
 				<div class="product-lable">
-								
 									<div class="onsale"></div>						
 	</div>
 <a href="product.html?product=zipper-pen-pouch" class="woocommerce-LoopProduct-link"><img src="/wp-content/themes/rappod/images/placeholder.jpg" alt="No thumb"></a>			<div class="product-button">
@@ -958,7 +890,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 				0 review			</div>
 		</div>
 					<h3 class="product-title"><a href="product.html?product=zipper-pen-pouch">Zipper Pen Pouch</a></h3>
-				
 	<span class="price"><span class="woocommerce-Price-amount amount" aria-hidden="true"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 150.00</bdi></span> <span aria-hidden="true">–</span> <span class="woocommerce-Price-amount amount" aria-hidden="true"><bdi><span class="woocommerce-Price-currencySymbol">KSh</span> 200.00</bdi></span><span class="screen-reader-text">Price range: KSh 150.00 through KSh 200.00</span></span>
 			</div>
 		</div>
@@ -1028,7 +959,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
         margin-top: 30px !important;
     }
 </style>
-
 <footer id="bwp-footer" class="bwp-footer footer-1">
     <div class="footer-container">
         <div class="container">
@@ -1046,7 +976,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
                         </div>
                     </div>
                 </div>
-                
                 <!-- Column 2 -->
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="widget widget_nav_menu">
@@ -1059,7 +988,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
                         </ul>
                     </div>
                 </div>
-
                 <!-- Column 3 -->
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="widget contact-info">
@@ -1071,7 +999,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
                         </div>
                     </div>
                 </div>
-
                 <!-- Column 4 -->
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="widget newsletter-widget">
@@ -1087,7 +1014,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
                 </div>
             </div>
         </div>
-        
         <div class="footer-bottom">
             <div class="container">
                 <div class="copy-right text-center">
@@ -1097,11 +1023,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
         </div>
     </div>
 </footer>
-
-    
-
-
-    
 					</div><!-- #page -->
 	<div class="search-overlay">	
 				<div class="close-search-overlay"></div>
@@ -1115,7 +1036,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 				</div> 
 				<div class="form-search">
 						<form role="search" method="get" class="search-from " action="shop.html" data-admin="/#" data-noresult="Sorry No Results Found" data-limit="6">
-			
 		<div class="search-box">
 			<button id="searchsubmit" class="btn" type="submit">
 				<i class="icon-search"></i>
@@ -1242,7 +1162,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 	</div>
 </div></div>
 </div>
-
 							</div>
 											</div>
 							</div>
@@ -1253,7 +1172,6 @@ window.addEventListener('DOMContentLoaded', loadProduct);
 		<div class="bwp-quick-view"></div>
 	</div>
 		<div class="back-top"></div>
-					
 		<div class="remove-mobile-menu"></div>
 	<div class="content-mobile-menu hidden-lg">
 					<div class="content">
@@ -1348,23 +1266,5 @@ var tawcvs_config = {"large_product_threshold":"100"};
 /* ]]> */
 </script>
 <script type="text/javascript" src="/wp-content/plugins/variation-swatches-for-woocommerce/assets/js/frontend.js?ver=2.2.6" id="tawcvs-frontend-js"></script>
-<script id="wp-emoji-settings" type="application/json">
-{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?ver=6.9.4"}}
-</script>
-<script type="module">
-/* <![CDATA[ */
-/*! This file is auto-generated */
-const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
-//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
-/* ]]> */
-</script>
-
-
-
-
-<!-- Technical Bridge for Rappod Child Theme -->
-<script src="cart.js"></script>
-<script src="add-to-cart.js"></script>
 </body>
 </html>
-
