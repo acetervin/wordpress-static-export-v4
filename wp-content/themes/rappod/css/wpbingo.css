@@ -1,7 +1,7 @@
 @font-face{
   font-family:wpbingofont;
-  src:url(/wp-content/themes/rappod/fonts/wpbingo.eot?fzv6fp);
-  src:url(/wp-content/themes/rappod/fonts/wpbingo.eot?fzv6fp#iefix) format("embedded-opentype"),url(/wp-content/themes/rappod/fonts/wpbingo.ttf?fzv6fp) format("truetype"),url(/wp-content/themes/rappod/fonts/wpbingo.woff?fzv6fp) format("woff"),url(/wp-content/themes/rappod/fonts/wpbingo.svg?fzv6fp#wpbingo) format("svg");
+  src:url(../fonts/wpbingo.eot?fzv6fp);
+  src:url(../fonts/wpbingo.eot?fzv6fp#iefix) format("embedded-opentype"),url(../fonts/wpbingo.ttf?fzv6fp) format("truetype"),url(../fonts/wpbingo.woff?fzv6fp) format("woff"),url(../fonts/wpbingo.svg?fzv6fp#wpbingo) format("svg");
   font-weight:400;
   font-style:normal;
   font-display:block;

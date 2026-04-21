@@ -1,7 +1,7 @@
 @font-face{
 	font-family:ElegantIcons;
-	src:url(/wp-content/themes/rappod/fonts/ElegantIcons.eot);
-	src:url(/wp-content/themes/rappod/fonts/ElegantIcons.eot#iefix) format("embedded-opentype"),url(/wp-content/themes/rappod/fonts/ElegantIcons.woff) format("woff"),url(/wp-content/themes/rappod/fonts/ElegantIcons.ttf) format("truetype"),url(/wp-content/themes/rappod/fonts/ElegantIcons.svg#ElegantIcons) format("svg");
+	src:url(../fonts/ElegantIcons.eot);
+	src:url(../fonts/ElegantIcons.eot?#iefix) format("embedded-opentype"),url(../fonts/ElegantIcons.woff) format("woff"),url(../fonts/ElegantIcons.ttf) format("truetype"),url(../fonts/ElegantIcons.svg#ElegantIcons) format("svg");
 	font-weight:400;
 	font-style:normal;
 }

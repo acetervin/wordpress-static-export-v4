@@ -1,7 +1,7 @@
 @font-face{
   font-family:icomoon;
-  src:url(/wp-content/themes/rappod/fonts/icomoon.eot?fzv6fp);
-  src:url(/wp-content/themes/rappod/fonts/icomoon.eot?fzv6fp#iefix) format("embedded-opentype"),url(/wp-content/themes/rappod/fonts/icomoon.ttf?fzv6fp) format("truetype"),url(/wp-content/themes/rappod/fonts/icomoon.woff?fzv6fp) format("woff"),url(/wp-content/themes/rappod/fonts/icomoon.svg?fzv6fp#icomoon) format("svg");
+  src:url(../fonts/icomoon.eot?fzv6fp);
+  src:url(../fonts/icomoon.eot?fzv6fp#iefix) format("embedded-opentype"),url(../fonts/icomoon.ttf?fzv6fp) format("truetype"),url(../fonts/icomoon.woff?fzv6fp) format("woff"),url(../fonts/icomoon.svg?fzv6fp#icomoon) format("svg");
   font-weight:400;
   font-style:normal;
   font-display:block;

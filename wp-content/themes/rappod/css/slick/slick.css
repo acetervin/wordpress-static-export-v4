@@ -4,7 +4,7 @@
 
 .slick-list{ overflow:hidden; margin:0; padding:0; }
 .slick-list:focus{ outline:none; }
-.slick-loading .slick-list{ background:#fff url(/wp-content/themes/rappod/css/slick/ajax-loader.gif) 50% no-repeat; }
+.slick-loading .slick-list{ background:#fff url(ajax-loader.gif) 50% no-repeat; }
 .slick-list.dragging{ cursor:pointer; cursor:hand; }
 
 .slick-slide,.slick-slide img,.slick-slider .slick-list,.slick-track{ -webkit-transform:translateZ(0); transform:translateZ(0); }
