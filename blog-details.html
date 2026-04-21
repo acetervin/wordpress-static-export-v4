@@ -21,10 +21,15 @@
 <link rel="stylesheet" id="font-awesome-css" href="/wp-content/plugins/elementor/assets/lib/font-awesome/css/font-awesome.min.css" type="text/css" media="all">
 <link rel="stylesheet" id="elegant-css" href="/wp-content/themes/rappod/css/elegant.css" type="text/css" media="all">
 <script type="text/javascript" src="/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<style type="text/css" id="wp-custom-css">
+			.wpbingoLogo > a > img {
+    height: 50px !important;
+    width: 50px !important;
+}		</style>
 <script src="cart.js"></script>
 <script src="add-to-cart.js"></script>
 </head>
-<body class="single-post wp-theme-rappod wp-child-theme-rappod-child theme-rappod woocommerce-no-js">
+<body class="single-post wp-theme-rappod wp-child-theme-rappod-child theme-rappod woocommerce-no-js banners-effect-6 elementor-default elementor-kit-51270">
 <div id="page" class="hfeed page-wrapper">
     <header id="bwp-header" class="bwp-header header-v1">
 				<div id="bwp-topbar" class="topbar-v1 hidden-sm hidden-xs">
@@ -51,7 +56,7 @@
 							</div>
 																	<div class="header-logo-mobile text-center">
 										<div class="wpbingoLogo">
-			<a href="/">
+			<a href="index.html">
 									<img src="/wp-content/uploads/2026/02/imageedit_1_6493853436.png" alt="StationaryCentralDepot">
 							</a>
 		</div> 
@@ -83,7 +88,7 @@
 						<div class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
 									<div class="empty">
 						<span>Your cart is currently empty.</span>
-						<a class="go-shop" href="/shop.html">Shop all products</a>
+						<a class="go-shop" href="shop.html">Shop all products</a>
 					</div>
 							</div>
 					</form><!-- end product list -->
@@ -102,14 +107,14 @@
 		</div>
 					<div class="header-mobile-fixed">
 								<div class="shop-page">
-						<a href="/shop.html">
+						<a href="shop.html">
 							<i class="feather-grid"></i>
 							<span>Shop</span>
 						</a>
 					</div>
 												<div class="my-account">
 						<div class="login-header">
-							<a href="/my-account.html">
+							<a href="my-account.html">
 								<i class="feather-user"></i>
 								<span>Account</span>
 							</a>
@@ -129,7 +134,7 @@
 				<div class="header-container logo-menu-icons menu-center">
 												<div class="header-logo text-left">
 										<div class="wpbingoLogo">
-			<a href="/">
+			<a href="index.html">
 									<img src="/wp-content/uploads/2026/02/imageedit_1_6493853436.png" alt="StationaryCentralDepot">
 							</a>
 		</div> 
@@ -143,15 +148,16 @@
 					<div class="bwp-navigation primary-navigation navbar-mega" data-text_close="Close">
 						<div class="float-menu">
 <nav id="main-navigation" class="std-menu clearfix">
-<div class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li class="level-0 menu-item-51195  menu-item-has-children    menu-item menu-item-type-post_type menu-item-object-page menu-item-home mega-menu mega-menu-fullwidth-width     "><a href="/"><span class="menu-item-text">Home</span></a><div class="sub-menu"></div></li>
-<li class="level-0 menu-item-51196  menu-item-has-children    menu-item menu-item-type-post_type menu-item-object-page  mega-menu mega-menu-fullwidth-width     "><a href="/shop.html"><span class="menu-item-text">Shop</span></a><div class="sub-menu"></div></li>
-<li class="level-0 menu-item-51197  menu-item-has-children    menu-item menu-item-type-post_type menu-item-object-product  mega-menu mega-menu-fullwidth-width     "><a href="product.html?product=candy-color"><span class="menu-item-text">Products</span></a><div class="sub-menu"></div></li>
+<div class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li class="level-0 menu-item-51195  menu-item-has-children    menu-item menu-item-type-post_type menu-item-object-page menu-item-home mega-menu mega-menu-fullwidth-width     "><a href="index.html"><span class="menu-item-text">Home</span></a><div class="sub-menu"></div></li>
+<li class="level-0 menu-item-51196  menu-item-has-children    menu-item menu-item-type-post_type menu-item-object-page  mega-menu mega-menu-fullwidth-width     "><a href="shop.html"><span class="menu-item-text">Shop</span></a><div class="sub-menu"></div></li>
+
 <li class="level-0 menu-item-51198  menu-item-has-children    menu-item menu-item-type-post_type menu-item-object-page current-menu-item  mega-menu mega-menu-fullwidth-width     "><a href="blog.html"><span class="menu-item-text">Blog</span></a><div class="sub-menu"></div></li>
+<li class="level-0 menu-item-51200 menu-item-type-post_type menu-item-object-page mega-menu"><a href="about-us.html"><span class="menu-item-text">About Us</span></a></li>
 <li class="level-0 menu-item-48765      menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  std-menu      "><a href="#"><span class="menu-item-text">Page</span></a>
 <ul class="sub-menu">
-	<li class="level-1 menu-item-51200      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/about-us.html">About Us</a></li>
-	<li class="level-1 menu-item-51201      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/contact.html">Contact</a></li>
-	<li class="level-1 menu-item-51202      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="/faq.html">Faq</a></li>
+	
+	<li class="level-1 menu-item-51201      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="contact.html">Contact</a></li>
+	<li class="level-1 menu-item-51202      menu-item menu-item-type-post_type menu-item-object-page  std-menu      "><a href="faq.html">Faq</a></li>
 </ul>
 </li>
 </ul></div></nav>
@@ -170,7 +176,7 @@
 												</div>
 																						<!-- End Search -->
 																							<div class="login-header">
-																											<a class="active-login" href="/my-account.html"><i class="icon-user"></i></a>
+																											<a class="active-login" href="my-account.html"><i class="icon-user"></i></a>
 																																	</div>
 																																	<div class="wishlist-box">
 												<a href="#">
@@ -204,7 +210,7 @@
 						<div class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
 									<div class="empty">
 						<span>Your cart is currently empty.</span>
-						<a class="go-shop" href="/shop.html">Shop all products</a>
+						<a class="go-shop" href="shop.html">Shop all products</a>
 					</div>
 							</div>
 					</form><!-- end product list -->
@@ -228,7 +234,7 @@
         <div class="breadcrumb-noheading">
             <div class="container">
                 <div id="breadcrumb" class="breadcrumb">
-                    <div class="bwp-breadcrumb"><a href="/">Home</a> <span class="delimiter"></span> <a href="blog.html">Blog</a> <span class="delimiter"></span> <span class="current">Loading...</span></div>
+                    <div class="bwp-breadcrumb"><a href="index.html">Home</a> <span class="delimiter"></span> <a href="blog.html">Blog</a> <span class="delimiter"></span> <span class="current">Loading...</span></div>
                 </div>
             </div>
         </div>
@@ -285,7 +291,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="widget">
                         <div class="wpbingoLogo">
-                            <a href="/">
+                            <a href="index.html">
                                 <img src="/wp-content/uploads/2026/02/imageedit_1_6493853436.png" alt="Logo" style="height: 50px; margin-bottom: 20px;">
                             </a>
                         </div>
@@ -299,10 +305,10 @@
                     <div class="widget widget_nav_menu">
                         <h2 class="widget-title">Quick Links</h2>
                         <ul class="menu">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/shop.html">Shop</a></li>
-                            <li><a href="/about-us.html">About Us</a></li>
-                            <li><a href="/contact.html">Contact</a></li>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -342,6 +348,10 @@
     </div>
 </footer>
 </div>
+<script type="text/javascript" src="/wp-content/themes/rappod/js/popper.min.js" id="popper-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rappod/js/bootstrap.min.js" id="bootstrap-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rappod/js/jquery.mmenu.all.min.js" id="jquery-mmenu-all-js"></script>
+<script type="text/javascript" src="/wp-content/themes/rappod/js/functions.js" id="rappod-script-js"></script>
 <script src="blog-bridge.js"></script>
 </body>
 </html>
